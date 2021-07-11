@@ -3,8 +3,7 @@
 #include <vector>
 #include "tic-tac-funcs.hpp"
 
-
-int main() {
+bool game() {
 	bool game_running = true;
 	start_game();
 	while(game_running) {
@@ -21,7 +20,7 @@ int main() {
 			break;
 		} else if(game_status[0] == 1) {
 			if(game_status[1] == 1) {
-				std::cout << "\n\nPlayer 1 wins!" << std::endl;
+				std::cout << "\n\nPlayer 1 wins!\n" << std::endl;
 				break;
 			} else {
 				std::cout << "\n\nPlayer 2 wins!\n" << std::endl;
@@ -53,4 +52,24 @@ int main() {
 		
 		//game_running = false;
   }
+	return true;
+}
+int main() {
+	game();
+	while(true) {
+		std::vector<int> again = play_again();
+		if(again[0] == 0) {
+			std::cout << "\nPlease enter a valid input\n" << std::endl;
+			continue;
+		} else {
+			if(again[1] == 0) {
+				break;
+			} else if(again[1] == 1) {
+				reset_game();
+				game();
+				continue;
+			}
+		}
+	}
+	return 1;
 }

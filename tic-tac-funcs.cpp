@@ -204,7 +204,41 @@ std::vector<int> check_game_status() {
 	if(turn >= 10 && info[0] != 1) {
 		info = {0,1};
 	}
-	
-	//std::cout << info[0] << ", " << info[1] << std::endl;
 	return info;
 } 
+
+//Asks if player wants to play again
+
+std::vector<int> play_again() {
+	std::vector<int> info;
+	std::string raw_choice;
+	std::cout << "Play again? (y/n): ";
+	std::cin >> raw_choice;
+	if(raw_choice.size() > 1) {
+		info = {0};
+		return info;
+	}
+	char choice = raw_choice[0];
+	if(std::tolower(choice, std::locale()) != 'y' && std::tolower(choice, std::locale()) != 'n') {
+		info = {0};
+	} else {
+		if(std::tolower(choice, std::locale()) == 'y') {
+			info = {1,1};
+		} else {
+			info = {1,0};
+		}
+	}
+	return info;
+}
+
+//Resets game values
+
+void reset_game() {
+	//reset turn counter
+	turn = 1;
+	//reset rows
+	row1 = {"1 "," ", "|", " ", "|", " "};
+	row2 = {"2 ", " ", "|", " ", "|", " "};
+	row3 = {"3 ", " ", "|", " ", "|", " "};
+	rows = {row1, row2, row3};
+}
